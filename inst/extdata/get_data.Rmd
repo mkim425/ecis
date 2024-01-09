@@ -1,0 +1,61 @@
+---
+title: "Get Data"
+output: html_document
+---
+
+```{r}
+# remotes::install_github("Infectious-Disease-Modeling-Hubs/hubUtils",
+#                         dependencies = TRUE)
+# remotes::install_github("Infectious-Disease-Modeling-Hubs/hubEnsembles")
+# remotes::install_github("Infectious-Disease-Modeling-Hubs/hubVis")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(hubUtils)
+library(hubEnsembles)
+library(hubVis)
+
+library(dplyr)
+library(here)
+setwd(here())
+```
+
+
+```{r flu}
+hub_path_flu<- system.file("testhubs/flusight", package = "hubUtils")
+hub_con_flu <- connect_hub(hub_path_flu)
+dat_flu <- hub_con_flu %>%
+  #filter(output_type == "quantile", location == "US") %>%
+  collect() # %>%
+  # filter(forecast_date == max(forecast_date)) 
+
+# usethis::use_data(dat_flu, internal = TRUE)
+```
+
+```{r}
+dat_flu$location %>% unique()
+dat_flu$target %>% unique()
+dat_flu$horizon %>% unique()
+dat_flu$model_id %>% unique()
+dat_flu$output_type %>% unique()
+```
+
+
+```{r }
+hub_path<- system.file("testhubs/simple", package = "hubUtils")
+hub_con <- connect_hub(hub_path)
+dat <- hub_con %>%
+  #filter(output_type == "quantile", location == "US") %>%
+  collect() # %>%
+  # filter(forecast_date == max(forecast_date)) 
+```
+
+```{r }
+hub_path<- system.file("testhubs/simple-dprc", package = "hubUtils")
+hub_con <- connect_hub(hub_path)
+dat <- hub_con %>%
+  #filter(output_type == "quantile", location == "US") %>%
+  collect() # %>%
+  # filter(forecast_date == max(forecast_date)) 
+```
