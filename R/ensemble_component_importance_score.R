@@ -10,7 +10,7 @@
 #' @param scoring_rule String specifying metric to use to calculate importance; `c("MAE", "MSE", "WIS", "CRPS", "Logscore")`.
 #' @param na.action String specifying treatment for missing data; `c("worst", "average", "drop")`.
 #'
-#' @return A data.frame with columns `task_id`, `model`, `importance_score`.
+#' @return A data.frame with columns `task_id`, `output_type`, `model`, `importance_score`.
 #' @export
 #'
 #' @examples
@@ -24,6 +24,7 @@ ensemble_component_importance_score <- function(
                 subset_wt = c("equal", "perm_based"),
                 scoring_rule = c("MAE", "MSE", "WIS", "CRPS", "Logscore"),
                 na.action = c("worst", "average", "drop")){
+        score_result <- NULL()
         return(score_result)
 }
 
