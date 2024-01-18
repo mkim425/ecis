@@ -3,6 +3,10 @@
 #' @param forecast_data A data.frame with the predictions that is or can be coerced to a model_out_tbl format.
 #'
 #' @return List of data sets. Each data set is for a single task.
+#' @importFrom magrittr "%>%"
+#' @importFrom dplyr across
+#' @importFrom dplyr all_of
+#' @import hubUtils
 #' @export
 #'
 #' @examples
