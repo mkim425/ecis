@@ -36,7 +36,7 @@ ensemble_component_importance_score(
 \item{na.action}{String specifying treatment for missing data; \code{c("worst", "average", "drop")}.}
 }
 \value{
-A data.frame with columns \code{task_id}, \code{model}, \code{importance_score}.
+A data.frame with columns \code{task_id}, \code{output_type}, \code{model}, \code{importance_score}.
 }
 \description{
 Evaluate ensemble component model's importance based on a measure of their contribution to ensemble prediction accuracy
