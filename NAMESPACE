@@ -2,3 +2,7 @@
 
 export(ensemble_component_importance_score)
 export(split_data_by_task)
+import(hubUtils)
+importFrom(dplyr,across)
+importFrom(dplyr,all_of)
+importFrom(magrittr,"%>%")
