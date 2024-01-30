@@ -25,7 +25,10 @@ ensemble_component_importance_score <- function(
                 scoring_rule = c("MAE", "MSE", "WIS", "CRPS", "Logscore"),
                 na.action = c("worst", "average", "drop")){
 
-        dat_list <- split_data_by_task(forecast_data)
+        # validate input data and get a model_out_tbl format with a single output type
+        valid_tbl <- input_data_validation(forecast_data)
+        # list of data sets by a single task.
+        dat_list <- split_data_by_task(valid_tbl)
 
         for (i in 1:length(dat_list)){
                 dat <- dat_list[[i]]
