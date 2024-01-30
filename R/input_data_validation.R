@@ -22,13 +22,15 @@ input_data_validation <- function(forecast_data){
                 # Validate a `model_out_tbl` object
                 hubUtils::validate_model_out_tbl()
 
+        # Check if NA exists in the output type
+        if (sum(is.na(valid_tbl$output_type)) != 0){
+                stop("The output type has a missing value.")
+        }
+
         # Check if the data contain a single output type
         num_output_type <- valid_tbl$output_type %>% unique() %>% length()
-        if (num_output_type > 1){
-                stop("The input data must contain a single output type. ")
-        }
-        if (num_output_type == 0){
-                stop("The output type in the data is missing.")
+        if (num_output_type != 1){
+                stop("The input data must contain a single output type.")
         }
 
         return(valid_tbl)
