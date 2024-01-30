@@ -24,6 +24,39 @@ ensemble_component_importance_score <- function(
                 subset_wt = c("equal", "perm_based"),
                 scoring_rule = c("MAE", "MSE", "WIS", "CRPS", "Logscore"),
                 na.action = c("worst", "average", "drop")){
+
+        dat_list <- split_data_by_task(forecast_data)
+
+        for (i in 1:length(dat_list)){
+                dat <- dat_list[[i]]
+                output_type <- dat$output_type %>% unique()
+                # check the output_type
+                if (output_type %in% c("mean", "median")){
+                        if (!(scoring_rule %in% c("MAE", "MSE"))){
+                                stop("The scoring rule needs to be either MAE or MSE")
+                        }
+                        print(i)
+                        print(output_type)
+                }
+                if (output_type == "quantile"){
+                        if (!(scoring_rule == "WIS")){
+                                stop("The scoring rule needs to be WIS")
+                        }
+                        print(i)
+                        print(output_type)
+                }
+                if (output_type %in% c("pmf", "cdf")){
+                        if (!(scoring_rule == "CRPS")){
+                                stop("The scoring rule needs to be CRPS")
+                        }
+                        print(i)
+                        print(output_type)
+                }
+                if (output_type == "sample"){
+                        stop("sample model output type is under development and not yet supported. Please use a different output type.")
+                }
+
+        }
         score_result <- NULL()
         return(score_result)
 }
