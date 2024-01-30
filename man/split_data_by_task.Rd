@@ -7,7 +7,7 @@
 split_data_by_task(valid_tbl)
 }
 \arguments{
-\item{forecast_data}{A data.frame in a model_out_tbl format.}
+\item{valid_tbl}{A data.frame in a model_out_tbl format.}
 }
 \value{
 List of data sets. Each data set is for a single task.
