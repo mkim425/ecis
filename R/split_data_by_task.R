@@ -1,6 +1,6 @@
 #' Split forecast data by a single task
 #'
-#' @param forecast_data A data.frame in a model_out_tbl format.
+#' @param valid_tbl A data.frame in a model_out_tbl format.
 #'
 #' @return List of data sets. Each data set is for a single task.
 #' @importFrom magrittr "%>%"
