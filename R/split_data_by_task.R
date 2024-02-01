@@ -21,13 +21,13 @@
 #'         split_data_by_task()
 split_data_by_task <- function(valid_tbl){
 
-        # Extract task_IDs
-        task_id <- setdiff(colnames(valid_tbl),
+        # Extract task_ID columns
+        task_id_cols <- setdiff(colnames(valid_tbl),
                             c("model_id", "output_type", "output_type_id", "value"))
 
         # List of data sets by task and output_type
         grouped_df <- valid_tbl %>%
-                dplyr::group_by(across(all_of(c(task_id)))) %>%
+                dplyr::group_by(across(all_of(c(task_id_cols)))) %>%
                 dplyr::group_split()
 
         return(grouped_df)
