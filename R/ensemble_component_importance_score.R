@@ -27,6 +27,7 @@ ensemble_component_importance_score <- function(
 
         # validate input data and get a model_out_tbl format with a single output type
         valid_tbl <- input_data_validation(forecast_data)
+
         # list of data sets by a single task.
         dat_list <- split_data_by_task(valid_tbl)
 
