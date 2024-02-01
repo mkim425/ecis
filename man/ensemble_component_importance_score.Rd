@@ -2,13 +2,13 @@
 % Please edit documentation in R/ensemble_component_importance_score.R
 \name{ensemble_component_importance_score}
 \alias{ensemble_component_importance_score}
-\title{Evaluate ensemble component model's importance based on a measure of their contribution to ensemble prediction accuracy}
+\title{Evaluate ensemble component model's importance based on a measure of their contribution to ensemble prediction accuracy for each combination of model task.}
 \usage{
 ensemble_component_importance_score(
   forecast_data,
   true_value,
-  output_type = c("quantile", "pmf", "cdf", "mean", "median", "sample"),
-  agg_fun = c("mean", "median"),
+  ensembling = c("simple", "linear_pool"),
+  agg_fun = "mean",
   weighted = FALSE,
   method = c("lomo", "lasomo"),
   subset_wt = c("equal", "perm_based"),
@@ -21,23 +21,34 @@ ensemble_component_importance_score(
 
 \item{true_value}{Ground truth data, i.e., "target data", for the variables that are used to define modeling targets.}
 
-\item{output_type}{String specifying the type of representation of the predictive distribution;  \code{c("quantile", "pmf", "cdf", "mean", "median", "sample")}.}
+\item{ensembling}{A character string specifying a ensemble method, either "simple" or "linear_pool"; \code{c("simple", "linear_pool")}.
+\itemize{
+\item When \code{"simple"} is specified, the ensemble is generated using the function selected in \code{agg_fun}, and
+it takes into account the weight option specified in \code{weighted}.
+\item When \code{"linear_pool"} is specified, ensemble model outputs are created as a linear pool of component model outputs. This method supports only an \code{output_type} of \code{mean}, \code{quantile}, \code{cdf}, or \code{pmf}.
+}}
 
-\item{agg_fun}{String specifying method for ensembling quantiles; \code{c("mean", "median")}.}
+\item{agg_fun}{A character string specifying aggregation method of component model outputs.
+Default is \code{"mean"}, meaning that equally (or weighted) mean is calculated
+across all component model outputs for each unique \code{output_type_id}.
+This can be \code{"median"} or a custom function (e.g., geometric_mean. see https://infectious-disease-modeling-hubs.github.io/hubEnsembles/articles/hubEnsembles.html#creating-ensembles-with-linear_pool)}
 
-\item{weighted}{Boolean indicating whether model weighting should be done. If \code{FALSE}, all models are given equal weight. If \code{TRUE}, model weights are estimated.}
+\item{weighted}{Boolean indicating whether model weighting should be done.
+If \code{FALSE}, all models are given equal weight. If \code{TRUE}, model weights are estimated.}
 
-\item{method}{String specifying algorithm for model importance calculation; \code{c("lomo", "lasomo")}. \code{"lomo"} stands for leave-one-model-out and \code{"lasomo"} stands for leave all subsets of models out.}
+\item{method}{A character string specifying algorithm for model importance calculation; \code{c("lomo", "lasomo")}.
+\code{"lomo"} stands for leave-one-model-out and \code{"lasomo"} stands for leave all subsets of models out.}
 
-\item{subset_wt}{String specifying method for assigning weight to subsets when using \code{lasomo} algorithm.}
+\item{subset_wt}{A character string specifying method for assigning weight to subsets when using \code{lasomo} algorithm.}
 
-\item{scoring_rule}{String specifying metric to use to calculate importance; \code{c("MAE", "MSE", "WIS", "CRPS", "Logscore")}.}
+\item{scoring_rule}{A character string specifying metric to use to calculate importance; \code{c("MAE", "MSE", "WIS", "CRPS", "Logscore")}.
+Specify one of them depending on which is available for the output type in the input data.}
 
-\item{na.action}{String specifying treatment for missing data; \code{c("worst", "average", "drop")}.}
+\item{na.action}{A character string specifying treatment for missing data; \code{c("worst", "average", "drop")}.}
 }
 \value{
 A data.frame with columns \code{task_id}, \code{output_type}, \code{model}, \code{importance_score}.
 }
 \description{
-Evaluate ensemble component model's importance based on a measure of their contribution to ensemble prediction accuracy
+Evaluate ensemble component model's importance based on a measure of their contribution to ensemble prediction accuracy for each combination of model task.
 }
