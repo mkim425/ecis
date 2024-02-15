@@ -12,7 +12,7 @@
 #' This can be `"median"` or a custom function (e.g., geometric_mean. Details can be found in https://infectious-disease-modeling-hubs.github.io/hubEnsembles/articles/hubEnsembles.html#creating-ensembles-with-linear_pool)
 #' @param weighted Boolean indicating whether model weighting should be done.
 #' If `FALSE`, all models are given equal weight. If `TRUE`, model weights are estimated.
-#' @param training_window_length description
+#' @param training_window_length An integer value representing the time interval of historical data used during the training process to estimate model weights.
 #' @param importance_algorithm A character string specifying algorithm for model importance calculation; `c("lomo", "lasomo")`.
 #' `"lomo"` stands for leave-one-model-out and `"lasomo"` stands for leave all subsets of models out.
 #' @param subset_wt A character string specifying method for assigning weight to subsets when using `lasomo` algorithm.
