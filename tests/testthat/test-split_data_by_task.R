@@ -7,6 +7,8 @@ test_that("split_data_by_task() groups data correctly", {
                 dplyr::filter(output_type == "quantile") %>%
                 dplyr::collect() %>%
                 input_data_validation()
+        task_id_cols <- setdiff(colnames(forecast_data),
+                                c("model_id", "output_type", "output_type_id", "value"))
         result <- split_data_by_task(forecast_data)
 
         # Check if the result is a list
@@ -16,9 +18,9 @@ test_that("split_data_by_task() groups data correctly", {
         expect_equal(
                 length(result),
                 forecast_data %>%
-                        select(all_of(task_id)) %>%
-                        reframe(across(everything(), as.character)) %>%
-                        summarise(n_distinct(do.call(paste, c(., sep = "")))) %>%
+                        dplyr::select(all_of(task_id_cols)) %>%
+                        dplyr::reframe(across(everything(), as.character)) %>%
+                        dplyr::summarise(n_distinct(do.call(paste, c(., sep = "")))) %>%
                         as.numeric()
                      )
 
@@ -29,8 +31,8 @@ test_that("split_data_by_task() groups data correctly", {
                                 task_id <- setdiff(colnames(x),
                                                    c("model_id", "output_type", "output_type_id", "value"))
                                 a <- x %>%
-                                        select(all_of(task_id)) %>%
-                                        summarise_all(n_distinct) %>%
+                                        dplyr::select(all_of(task_id)) %>%
+                                        dplyr::summarise_all(n_distinct) %>%
                                         unlist %>% unname()
                                 setequal(a, rep(1, length(task_id)))}
                         )
