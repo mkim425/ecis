@@ -13,7 +13,7 @@ test_that("input_data_validation() requires a single output type in a dataset", 
                      "The output type has a missing value.")
 
         expect_equal(input_data_validation(forecast_data2) %>%
-                             select(output_type) %>%
+                             dplyr::select(output_type) %>%
                              unique() %>%
                              as.character(),
                      forecast_data2$output_type[1])
