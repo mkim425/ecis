@@ -7,10 +7,11 @@
 ensemble_component_importance_score(
   forecast_data,
   true_value,
-  ensembling = c("simple", "linear_pool"),
+  ensemble_fun = c("simple_ensemble", "linear_pool"),
   agg_fun = "mean",
   weighted = FALSE,
-  method = c("lomo", "lasomo"),
+  training_window_length = 0,
+  importance_algorithm = c("lomo", "lasomo"),
   subset_wt = c("equal", "perm_based"),
   scoring_rule = c("MAE", "MSE", "WIS", "CRPS", "Logscore"),
   na.action = c("worst", "average", "drop")
@@ -21,9 +22,9 @@ ensemble_component_importance_score(
 
 \item{true_value}{Ground truth data, i.e., "target data", for the variables that are used to define modeling targets.}
 
-\item{ensembling}{A character string specifying a ensemble method, either "simple" or "linear_pool"; \code{c("simple", "linear_pool")}.
+\item{ensemble_fun}{A character string specifying a ensemble method, either "simple_ensemble" or "linear_pool"; \code{c("simple_ensemble", "linear_pool")}.
 \itemize{
-\item When \code{"simple"} is specified, the ensemble is generated using the function selected in \code{agg_fun}, and
+\item When \code{"simple_ensemble"} is specified, the ensemble is generated using the function selected in \code{agg_fun}, and
 it takes into account the weight option specified in \code{weighted}.
 \item When \code{"linear_pool"} is specified, ensemble model outputs are created as a linear pool of component model outputs. This method supports only an \code{output_type} of \code{mean}, \code{quantile}, \code{cdf}, or \code{pmf}.
 }}
@@ -31,12 +32,14 @@ it takes into account the weight option specified in \code{weighted}.
 \item{agg_fun}{A character string specifying aggregation method of component model outputs.
 Default is \code{"mean"}, meaning that equally (or weighted) mean is calculated
 across all component model outputs for each unique \code{output_type_id}.
-This can be \code{"median"} or a custom function (e.g., geometric_mean. see https://infectious-disease-modeling-hubs.github.io/hubEnsembles/articles/hubEnsembles.html#creating-ensembles-with-linear_pool)}
+This can be \code{"median"} or a custom function (e.g., geometric_mean. Details can be found in https://infectious-disease-modeling-hubs.github.io/hubEnsembles/articles/hubEnsembles.html#creating-ensembles-with-linear_pool)}
 
 \item{weighted}{Boolean indicating whether model weighting should be done.
 If \code{FALSE}, all models are given equal weight. If \code{TRUE}, model weights are estimated.}
 
-\item{method}{A character string specifying algorithm for model importance calculation; \code{c("lomo", "lasomo")}.
+\item{training_window_length}{An integer value representing the time interval of historical data used during the training process to estimate model weights.}
+
+\item{importance_algorithm}{A character string specifying algorithm for model importance calculation; \code{c("lomo", "lasomo")}.
 \code{"lomo"} stands for leave-one-model-out and \code{"lasomo"} stands for leave all subsets of models out.}
 
 \item{subset_wt}{A character string specifying method for assigning weight to subsets when using \code{lasomo} algorithm.}
