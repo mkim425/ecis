@@ -15,7 +15,7 @@
 #'         collect() %>%
 #'         input_data_validation()
 
-input_data_validation <- function(forecast_data){
+valid_input_data <- function(forecast_data){
         valid_tbl <- forecast_data %>%
                 # Convert model output to a `model_out_tbl` class object
                 hubUtils::as_model_out_tbl() %>%
