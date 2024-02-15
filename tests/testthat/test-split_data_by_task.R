@@ -6,7 +6,7 @@ test_that("split_data_by_task() groups data correctly", {
         forecast_data <- hub_con %>%
                 dplyr::filter(output_type == "quantile") %>%
                 dplyr::collect() %>%
-                input_data_validation()
+                valid_input_data()
         task_id_cols <- setdiff(colnames(forecast_data),
                                 c("model_id", "output_type", "output_type_id", "value"))
         result <- split_data_by_task(forecast_data)
@@ -39,3 +39,5 @@ test_that("split_data_by_task() groups data correctly", {
                 ))
 
 })
+
+

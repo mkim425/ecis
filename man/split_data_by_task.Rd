@@ -23,6 +23,6 @@ hub_con <- connect_hub(hub_path)
 hub_con \%>\%
         filter(output_type == "quantile") \%>\%
         collect() \%>\%
-        input_data_validation() \%>\%
+        valid_input_data() \%>\%
         split_data_by_task()
 }
