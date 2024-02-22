@@ -37,13 +37,13 @@ ensemble_component_importance_score <- function(
                 na.action = c("worst", "average", "drop")){
 
         # validate input data and get a model_out_tbl format with a single output type
-        valid_tbl <- input_data_validation(forecast_data)
+        valid_tbl <- valid_input_data(forecast_data)
 
         if (weighted != FALSE){
                 # need training_forecast to estimate component model weights
                 # count the number of unique forecast_date
                 num_forecast <- valid_tbl %>%
-                        dplyr::select(any_of(c("forecast_date", "origin_date", "reference_date"))) %>%
+                        dplyr::select(dplyr::any_of(c("forecast_date", "origin_date", "reference_date"))) %>%
                         unique()
 
                 if (num_forecast <= training_window_length){
