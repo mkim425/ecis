@@ -13,7 +13,7 @@
 #' hub_con %>%
 #'         filter(output_type == "quantile") %>%
 #'         collect() %>%
-#'         input_data_validation()
+#'         valid_input_data()
 
 valid_input_data <- function(forecast_data){
         valid_tbl <- forecast_data %>%
