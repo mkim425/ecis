@@ -14,8 +14,13 @@ Depends:
 Imports:
     dplyr,
     hubUtils,
-    magrittr
+    magrittr,
+    tidyr,
+    tidyselect
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Remotes:
+    Infectious-Disease-Modeling-Hubs/hubUtils,
+    reichlab/distfromq
 LazyData: true
