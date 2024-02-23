@@ -14,21 +14,22 @@
 #' library(hubUtils)
 #' hub_path <- system.file("testhubs/flusight", package = "hubUtils")
 #' hub_con <- connect_hub(hub_path)
-#' hub_con %>%
-#'         filter(output_type == "quantile") %>%
-#'         collect() %>%
-#'         valid_input_data() %>%
-#'         split_data_by_task()
-split_data_by_task <- function(valid_tbl){
+#' hub_con |>
+#'   filter(output_type == "quantile") |>
+#'   collect() |>
+#'   valid_input_data() |>
+#'   split_data_by_task()
+split_data_by_task <- function(valid_tbl) {
+  # Extract task_ID columns
+  task_id_cols <- setdiff(
+    colnames(valid_tbl),
+    c("model_id", "output_type", "output_type_id", "value")
+  )
 
-        # Extract task_ID columns
-        task_id_cols <- setdiff(colnames(valid_tbl),
-                            c("model_id", "output_type", "output_type_id", "value"))
+  # List of data sets by task and output_type
+  grouped_df <- valid_tbl |>
+    dplyr::group_by(dplyr::across(dplyr::all_of(c(task_id_cols)))) |>
+    dplyr::group_split()
 
-        # List of data sets by task and output_type
-        grouped_df <- valid_tbl %>%
-                dplyr::group_by(across(all_of(c(task_id_cols)))) %>%
-                dplyr::group_split()
-
-        return(grouped_df)
+  return(grouped_df)
 }
