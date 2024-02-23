@@ -7,7 +7,8 @@
 valid_input_data(forecast_data)
 }
 \arguments{
-\item{forecast_data}{A data.frame with the predictions that is or can be coerced to a model_out_tbl format.}
+\item{forecast_data}{A data.frame with the predictions that is or can be
+coerced to a model_out_tbl format.}
 }
 \value{
 a model_out_tbl format that has a single output type
@@ -20,8 +21,8 @@ library(dplyr)
 library(hubUtils)
 hub_path <- system.file("testhubs/flusight", package = "hubUtils")
 hub_con <- connect_hub(hub_path)
-hub_con \%>\%
-        filter(output_type == "quantile") \%>\%
-        collect() \%>\%
-        valid_input_data()
+hub_con |>
+  filter(output_type == "quantile") |>
+  collect() |>
+  valid_input_data()
 }

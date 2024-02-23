@@ -13,10 +13,10 @@ test_that("split_data_by_task() groups data correctly", {
   )
   result <- split_data_by_task(forecast_data)
 
-  # Check if the result is a list
+  # The result is a list
   expect_type(result, "list")
 
-  # Check if the list length matches the number of unique combinations of task_ids
+  # The list length matches the number of unique combinations of task_ids
   expect_equal(
     length(result),
     forecast_data %>%
