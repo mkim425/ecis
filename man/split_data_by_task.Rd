@@ -20,9 +20,9 @@ library(dplyr)
 library(hubUtils)
 hub_path <- system.file("testhubs/flusight", package = "hubUtils")
 hub_con <- connect_hub(hub_path)
-hub_con \%>\%
-        filter(output_type == "quantile") \%>\%
-        collect() \%>\%
-        valid_input_data() \%>\%
-        split_data_by_task()
+hub_con |>
+  filter(output_type == "quantile") |>
+  collect() |>
+  valid_input_data() |>
+  split_data_by_task()
 }
