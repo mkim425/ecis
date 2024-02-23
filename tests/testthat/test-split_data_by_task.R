@@ -19,10 +19,10 @@ test_that("split_data_by_task() groups data correctly", {
   # Check if the list length matches the number of unique combinations of task_ids
   expect_equal(
     length(result),
-    forecast_data |>
-      dplyr::select(all_of(task_id_cols)) |>
-      dplyr::reframe(across(everything(), as.character)) |>
-      dplyr::summarise(n_distinct(do.call(paste, c(., sep = "")))) |>
+    forecast_data %>%
+      dplyr::select(all_of(task_id_cols)) %>%
+      dplyr::reframe(across(everything(), as.character)) %>%
+      dplyr::summarise(n_distinct(do.call(paste, c(., sep = "")))) %>%
       as.numeric()
   )
 
