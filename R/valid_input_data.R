@@ -7,10 +7,13 @@
 #' @export
 #'
 #' @examples
-#' library(dplyr)
 #' library(hubUtils)
-#' load("data/example_quantile_model_output.rda")
-#' example_quantile_model_output |>
+#' library(dplyr)
+#' hub_path <- system.file("testhubs/flusight", package = "hubUtils")
+#' hub_con <- connect_hub(hub_path)
+#' hub_con |>
+#'   filter(output_type == "quantile") |>
+#'   collect() |>
 #'   valid_input_data()
 valid_input_data <- function(forecast_data) {
   valid_tbl <- forecast_data |>
