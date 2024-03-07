@@ -18,13 +18,13 @@
 #' model outputs. Default is `"mean"`, meaning that equally (or weighted) mean
 #' is calculated across all component model outputs for each unique
 #' `output_type_id`. This can be `"median"` or a custom function
-#' (e.g., geometric_mean. Details can be found in
-#' https://infectious-disease-modeling-hubs.github.io/hubEnsembles/articles/hubEnsembles.html#creating-ensembles-with-linear_pool)
+#' (e.g., geometric_mean. Details can be found in https://rb.gy/ntl5zr)
 #' @param weighted Boolean indicating whether model weighting should be done.
 #' If `FALSE`, all models are given equal weight.
 #' If `TRUE`, model weights are estimated.
 #' @param training_window_length An integer value representing the time interval
-#' of historical data used during the training process to estimate model weights.
+#' of historical data used during the training process
+#' to estimate model weights.
 #' @param importance_algorithm A character string specifying algorithm for model
 #' importance calculation; `c("lomo", "lasomo")`.
 #' `"lomo"` stands for leave-one-model-out and
@@ -44,14 +44,35 @@
 #' @examples
 ensemble_component_importance <- function(forecast_data,
                                           true_value,
-                                          ensemble_fun = c("simple_ensemble", "linear_pool"),
+                                          ensemble_fun =
+                                            c(
+                                              "simple_ensemble",
+                                              "linear_pool"
+                                            ),
                                           agg_fun = "mean",
                                           weighted = FALSE,
                                           training_window_length = 0,
-                                          importance_algorithm = c("lomo", "lasomo"),
-                                          subset_wt = c("equal", "perm_based"),
-                                          scoring_rule = c("MAE", "MSE", "WIS", "CRPS", "Logscore"),
-                                          na.action = c("worst", "average", "drop")) {
+                                          importance_algorithm =
+                                            c(
+                                              "lomo",
+                                              "lasomo"
+                                            ),
+                                          subset_wt =
+                                            c(
+                                              "equal",
+                                              "perm_based"
+                                            ),
+                                          scoring_rule =
+                                            c(
+                                              "MAE", "MSE", "WIS",
+                                              "CRPS", "Logscore"
+                                            ),
+                                          na.action =
+                                            c(
+                                              "worst",
+                                              "average",
+                                              "drop"
+                                            )) {
   # validate input data and get a model_out_tbl format with a single output type
   valid_tbl <- valid_input_data(forecast_data)
 
