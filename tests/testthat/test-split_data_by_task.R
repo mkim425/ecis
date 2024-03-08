@@ -1,7 +1,9 @@
 library(dplyr)
 
 test_that("split_data_by_task() groups data correctly", {
-  forecast_data <- readRDS("testdata/flu_data.rds") |>
+  forecast_data <- readRDS(
+          system.file("testdata", "flu_data.rds", package = "ecis")
+  ) |>
     dplyr::filter(output_type == "quantile") |>
     valid_input_data()
   task_id_cols <- setdiff(
