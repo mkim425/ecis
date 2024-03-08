@@ -9,7 +9,7 @@
 #' @import hubUtils
 #' @export
 #'
-#' @examples
+#' @examples \dontrun{
 #' library(dplyr)
 #' library(hubUtils)
 #' hub_path <- system.file("testhubs/flusight", package = "hubUtils")
@@ -19,6 +19,7 @@
 #'   collect() |>
 #'   valid_input_data() |>
 #'   split_data_by_task()
+#'   }
 split_data_by_task <- function(valid_tbl) {
   # Extract task_ID columns
   task_id_cols <- setdiff(

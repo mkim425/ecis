@@ -16,6 +16,7 @@ List of data sets. Each data set is for a single task.
 Split forecast data by a single task
 }
 \examples{
+\dontrun{
 library(dplyr)
 library(hubUtils)
 hub_path <- system.file("testhubs/flusight", package = "hubUtils")
@@ -25,4 +26,5 @@ hub_con |>
   collect() |>
   valid_input_data() |>
   split_data_by_task()
+  }
 }

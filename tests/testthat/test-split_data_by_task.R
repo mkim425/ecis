@@ -1,11 +1,8 @@
 library(dplyr)
-library(hubUtils)
 
 test_that("split_data_by_task() groups data correctly", {
-  hub_con <- connect_hub(system.file("testhubs/flusight", package = "hubUtils"))
-  forecast_data <- hub_con |>
+  forecast_data <- readRDS("testdata/flu_data.rds") |>
     dplyr::filter(output_type == "quantile") |>
-    dplyr::collect() |>
     valid_input_data()
   task_id_cols <- setdiff(
     colnames(forecast_data),

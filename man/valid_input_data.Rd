@@ -17,12 +17,14 @@ a model_out_tbl format that has a single output type
 Check the input forecast data structure
 }
 \examples{
-library(dplyr)
+\dontrun{
 library(hubUtils)
+library(dplyr)
 hub_path <- system.file("testhubs/flusight", package = "hubUtils")
 hub_con <- connect_hub(hub_path)
 hub_con |>
   filter(output_type == "quantile") |>
   collect() |>
   valid_input_data()
+  }
 }

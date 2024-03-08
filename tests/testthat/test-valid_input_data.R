@@ -1,10 +1,7 @@
 library(dplyr)
-library(hubUtils)
 
 test_that("valid_input_data() requires a single output type in a dataset", {
-  hub_con <- connect_hub(system.file("testhubs/flusight", package = "hubUtils"))
-  forecast_data1 <- hub_con |>
-          dplyr::collect()
+  forecast_data1 <- readRDS("testdata/flu_data.rds")
   forecast_data2 <- forecast_data1 |> dplyr::filter(output_type == "quantile")
   row <- forecast_data2[23, ]
   row$output_type <- NA

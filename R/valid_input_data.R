@@ -6,7 +6,7 @@
 #' @return a model_out_tbl format that has a single output type
 #' @export
 #'
-#' @examples
+#' @examples \dontrun{
 #' library(hubUtils)
 #' library(dplyr)
 #' hub_path <- system.file("testhubs/flusight", package = "hubUtils")
@@ -15,6 +15,7 @@
 #'   filter(output_type == "quantile") |>
 #'   collect() |>
 #'   valid_input_data()
+#'   }
 valid_input_data <- function(forecast_data) {
   valid_tbl <- forecast_data |>
     # Convert model output to a `model_out_tbl` class object

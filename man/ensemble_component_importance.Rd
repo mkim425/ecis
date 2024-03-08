@@ -41,15 +41,15 @@ an \code{output_type} of \code{mean}, \code{quantile}, \code{cdf}, or \code{pmf}
 model outputs. Default is \code{"mean"}, meaning that equally (or weighted) mean
 is calculated across all component model outputs for each unique
 \code{output_type_id}. This can be \code{"median"} or a custom function
-(e.g., geometric_mean. Details can be found in
-https://infectious-disease-modeling-hubs.github.io/hubEnsembles/articles/hubEnsembles.html#creating-ensembles-with-linear_pool)}
+(e.g., geometric_mean. Details can be found in https://rb.gy/ntl5zr)}
 
 \item{weighted}{Boolean indicating whether model weighting should be done.
 If \code{FALSE}, all models are given equal weight.
 If \code{TRUE}, model weights are estimated.}
 
 \item{training_window_length}{An integer value representing the time interval
-of historical data used during the training process to estimate model weights.}
+of historical data used during the training process
+to estimate model weights.}
 
 \item{importance_algorithm}{A character string specifying algorithm for model
 importance calculation; \code{c("lomo", "lasomo")}.
